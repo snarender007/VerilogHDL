@@ -1,0 +1,33 @@
+-->Verilog Code
+
+`timescale 1ns / 1ps
+module logic_gates(
+    input a,b,
+    output y0,y1,y2,y3,y4
+    );
+    assign y0 = ~a;
+    assign y1 = (a&b);
+    assign y2 = (a|b);
+    assign y3 = ~(a&b);
+    assign y4= ~(a|b);
+    
+endmodule
+
+-->Test Bench Code
+
+`timescale 1ns / 1ps
+module stimuli(  );
+reg a,b;
+wire y0,y1,y2,y3,y4;
+logic_gates uut(a,b,y0,y1,y2,y3,y4);
+    
+initial 
+begin
+     a=0;b=0;
+ #10 a=0;b=1;
+ #10 a=1;b=0;
+ #10 a=1;b=1;
+ #10 $finish;
+ end
+endmodule
+
