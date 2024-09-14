@@ -1,0 +1,28 @@
+-->Verilog Code
+
+`timescale 1ns / 1ps
+module HalfAdder(
+    input a,b,
+    output sum,carry
+    );
+    assign sum = a^b;
+    assign carry = a & b;
+endmodule
+
+-->TestBench Code 
+
+`timescale 1ns / 1ps
+module stimuli1( );
+reg a,b;
+wire sum,carry;
+HalfAdder uut(a,b,sum,carry);
+initial
+begin
+$monitor("At time %0t: a=%b b=%b, sum=%b, carry=%b",$time, a,b,sum,carry);
+a=0;b=0;
+#10 a=0;b=1;
+#10 a=1;b=0;
+#10 a=1;b=1;
+#10 $finish ;
+end
+endmodule
